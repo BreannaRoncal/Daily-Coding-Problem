@@ -3,7 +3,7 @@
 
 int main(){
     std::vector<int> testNumbers = {10, 15, 3, 7};
-    int numToFind = 1;
+    int numToFind = 17;
 
     for (int i = 0; i < testNumbers.size(); i++){
         for (int j = 0; j < testNumbers.size(); j++){
