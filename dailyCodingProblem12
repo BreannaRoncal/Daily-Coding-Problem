@@ -1,0 +1,68 @@
+"""
+Daily Coding Problem #12:
+Kadane's Algorithm
+Given an array arr of N integers. Find the contiguous sub-array with
+maximum sum.
+
+
+Output:
+Print the maximum sum of the contiguous sub-array in a separate line for each
+test case.
+
+Example:
+Input:
+arr = [1, 2, 3, -2, 5]
+N = 5
+
+Output: 9 
+(1 + 2 + 3 -2 + 5)
+
+"""
+
+
+#import array
+
+def findMaxInt(arr, N):
+    max_int = arr[0]
+    for i in arr:
+
+        if (i > max_int):
+            max_int = i
+    return max_int
+
+def findMaxSubarray(arr, N, max_int):
+    #current max of the array
+    max_sum = max_int
+
+    #keep track of the max sum for each iteration
+    temp_sum = 0
+    
+    for i in range(N):
+        temp_sum += arr[i]
+
+        #set to 0 if the sum is negative
+        if temp_sum < 0:
+            temp_sum = 0
+
+        #set new maximum sum
+        elif temp_sum > max_sum:
+            max_sum = temp_sum
+            
+        
+            
+    
+    print(max_sum)
+    
+
+def main():
+    arr = [1, 2, 3, -2, 5]
+    N = 5
+
+    #find the maximum integer in the whole array to compare            
+    max_int = findMaxInt(arr, N)
+
+    findMaxSubarray(arr, N, max_int)
+        
+
+        
+main()
