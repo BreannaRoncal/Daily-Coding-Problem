@@ -1,0 +1,41 @@
+"""
+Daily Coding Problem #16:
+Given two arrays X and Y of positive integers, find number of pairs such
+that xy > yx (raised to power of) where x is an element from X and y is
+an element from Y.
+
+Example:
+Input:
+    X = [2, 1, 6]
+    Y = [1, 5]
+
+Output:
+    3, pairs: (2, 1), (2, 5), (6, 1)
+"""
+
+
+def getPairs(X, Y):#, M, N):
+    num_pairs = 0
+    for i in X:
+        for j in Y:
+            if i**j > j**i:
+                num_pairs += 1
+                
+    return num_pairs
+                
+
+def main():
+
+    X = [2, 1, 6]
+    Y = [1, 5]
+    
+        
+    num_pairs = getPairs(X, Y)
+    
+    print(num_pairs)    
+        
+
+        
+        
+        
+main()
