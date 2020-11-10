@@ -1,0 +1,28 @@
+"""
+Its base and height are both equal to n. It is drawn using # symbols and spaces. 
+The last line is not preceded by any spaces.
+
+Write a program that prints a staircase of size n.
+
+Example Input:
+n = 4
+
+Example Output:
+   #
+  ##
+ ###
+####
+"""
+
+def staircase(n):
+    for row in range(n):
+        for space in range(n - row - 1):
+            print(end = ' ')
+        for star in range(row + 1):
+            print("#", end='')
+        print()
+
+if __name__ == '__main__':
+    n = int(input())
+
+    staircase(n)
