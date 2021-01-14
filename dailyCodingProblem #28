@@ -1,0 +1,61 @@
+"""
+Repeated String
+
+There is a string, s, of lowercase English letters that is repeated infinitely many times. Given an integer, n, 
+find and print the number of letter a's in the first n letters of the infinite string.
+
+Complete the repeatedString function in the editor below.
+
+repeatedString has the following parameter(s):
+    -s: a string to repeat
+    -n: the number of characters to consider
+    -returns int: the frequency of a in the substring
+    
+Input Format:
+    The first line contains a single string, s.
+    The second line contains an integer, n.
+
+Example Input:
+    aba
+    10
+    
+Example Output:
+    7
+"""
+
+import os
+
+# Complete the repeatedString function below.
+def repeatedString(s, n):
+    s_length = len(s)
+    #count how many a's are in original s
+    total = s.count('a')
+    
+    #use floor division since you can't have a partial count of a
+    repeated_s = n // s_length
+    
+    #if n divides evenly, then just multiply by how many times
+    #the string was repeated
+    if n % s_length == 0:
+        total = total * repeated_s
+        
+    #counts the a's in total string multiplied by the times it
+    #was repeated plus the a's in the partial string
+    else:
+        #calculate the partial string
+        m = n % s_length
+        total = total * repeated_s + s[:m].count('a')
+    return total
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    n = int(input())
+
+    result = repeatedString(s, n)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
