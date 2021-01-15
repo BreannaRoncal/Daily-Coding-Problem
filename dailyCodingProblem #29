@@ -1,0 +1,65 @@
+"""
+2D Array
+
+Given a 6 x 6 2D Array, arr: 
+    1 1 1 0 0 0
+    0 1 0 0 0 0
+    1 1 1 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+An hourglass in A is a subset of values with indices falling in this pattern in arr's graphical 
+representation:  
+    a b c
+      d
+    e f g
+    
+There are 16 hourglasses in arr. An hourglass sum is the sum of an hourglass' values. Calculate the 
+hourglass sum for every hourglass in arr, then print the maximum hourglass sum. The array will 
+always be 6 x 6.
+
+Example Input:
+    arr =
+    1 1 1 0 0 0
+    0 1 0 0 0 0
+    1 1 1 0 0 0
+    0 0 2 4 4 0
+    0 0 0 2 0 0
+    0 0 1 2 4 0
+     
+Example Output:
+    19
+"""
+
+import os
+
+
+# Complete the hourglassSum function below.
+def hourglassSum(arr):
+    #worst-case is all -9
+    max_sum = -63
+    
+    #use 4-by-4 because array is 6x6
+    for i in range(4):
+        for j in range(4):
+            #brute force the hourglass pattern
+            temp_sum = (arr[i][j] + arr[i][j + 1] + arr[i][j + 2] + arr[i + 1][j + 1] 
+                        + arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2])
+            if temp_sum > max_sum:
+                max_sum = temp_sum
+    
+    return max_sum
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr = []
+
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = hourglassSum(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
