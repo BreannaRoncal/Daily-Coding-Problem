@@ -1,0 +1,63 @@
+"""
+Breaking the Records
+
+Maria plays college basketball and wants to go pro. Each season she maintains a record of her play. She 
+tabulates the number of times she breaks her season record for most points and least points in a game. 
+Points scored in the first game establish her record for the season, and she begins counting from there.
+
+Complete the breakingRecords function in the editor below. It must return an integer array containing the 
+numbers of times she broke her records. Index 0 is for breaking most points records, and index 1 is for 
+breaking least points records.
+
+    breakingRecords has the following parameter(s):
+        -scores: an array of integers
+
+Input Format:
+    The first line contains an integer n, the number of games.
+    The second line contains n space-separated integers describing the respective values of each
+    game's score.
+    
+Example Input:
+    9
+    10 5 20 20 4 5 2 25 1
+    
+Example Output:
+    2 4
+"""
+
+import os
+
+# Complete the breakingRecords function below.
+def breakingRecords(scores):
+    #initialize max and min values to 0
+    max_min = [0, 0]
+    
+    #initialize temp max and temp min scores to the scores of the first game
+    temp_max = scores[0] 
+    temp_min = scores[0]
+    
+    #Iterate through the whole list checking if the max and min records have been broke
+    for i in scores:
+        if i > temp_max:
+            temp_max = i
+            max_min[0] += 1
+        elif i < temp_min:
+            temp_min = i
+            max_min[1] += 1
+    
+    return max_min
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    scores = list(map(int, input().rstrip().split()))
+
+    result = breakingRecords(scores)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
