@@ -1,0 +1,55 @@
+"""
+Minimum Swaps 2
+
+You are given an unordered array consisting of consecutive integers [1, 2, 3, ..., n] without any duplicates. 
+You are allowed to swap any two elements. You need to find the minimum number of swaps required to sort 
+the array in ascending order.
+
+Complete the function minimumSwaps in the editor below. It must return an integer representing the minimum 
+number of swaps to sort the array.
+
+    minimumSwaps has the following parameter(s):
+        -arr: an unordered array of integers
+        -returns: minimum number of swaps
+        
+Input Format:
+    The first line contains an integer, n, the size of arr.
+    The second line contains n space-separated integers arr[i]. 
+    
+Example Input:
+    4
+    4 3 1 2
+    
+Example Output:
+    3
+    
+"""
+
+import os
+
+# Complete the minimumSwaps function below.
+def minimumSwaps(arr):
+    total = 0
+    
+    #Iterate through the whole list and swap the current index with the number
+    #that is in the current index's correct spot
+    #Use -1 because the list starts at 1
+    for i in range(len(arr)):
+        while i != arr[i] - 1:
+            curr = arr[i]
+            arr[curr - 1], arr[i] = arr[i], arr[curr - 1]
+            total += 1
+    return total
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    res = minimumSwaps(arr)
+
+    fptr.write(str(res) + '\n')
+
+    fptr.close()
