@@ -1,0 +1,45 @@
+"""
+Bubble Sort with a twist: count number of swaps
+
+Given an array of integers, sort the array in ascending order using the Bubble Sort algorithm above. 
+Once sorted, print the following three lines:
+    1. Array is sorted in numSwaps swaps., where numSwaps is the number of swaps that took place.
+    2. First Element: firstElement, where "firstElement" is the first element in the sorted array.
+    3. Last Element: lastElement, where "lastElement" is the last element in the sorted array.
+    
+Example Input:
+    3
+    3 2 1
+    
+Example Output:
+    Array is sorted in 3 swaps.
+    First Element: 1
+    Last Element: 3
+    
+"""
+
+# Complete the countSwaps function below.
+def countSwaps(a):
+    #keep track of the number of swaps
+    num_swaps = 0
+    
+    #Iterate through the array and swap elements into ascending order
+    for i in range(len(a)):
+        for j in range(len(a) - 1):
+            #swap elements into correct positions and increment number of swaps
+            if a[j] > a[j + 1]:
+                a[j], a[j + 1] = a[j + 1], a[j]
+                num_swaps += 1
+                
+    print("Array is sorted in", num_swaps, "swaps.")
+    print("First Element:", a[0])
+    print("Last Element:", a[len(a) - 1])
+    
+
+if __name__ == '__main__':
+    n = int(input())
+
+    a = list(map(int, input().rstrip().split()))
+
+    countSwaps(a)
+
