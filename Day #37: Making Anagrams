@@ -1,0 +1,72 @@
+"""
+Making Anagrams
+
+A student is taking a cryptography class and has found anagrams to be very useful. Two strings are 
+anagrams of each other if the first string's letters can be rearranged to form the second string. 
+In other words, both strings must contain the same exact letters in the same exact frequency. For example, 
+bacdc and dcbac are anagrams, but bacdc and dcbad are not.
+
+The student decides on an encryption scheme that involves two large strings. The encryption is dependent 
+on the minimum number of character deletions required to make the two strings anagrams. Determine this number.
+
+Given two strings, a and b, that may or may not be of the same length, determine the minimum number of 
+character deletions required to make a and b anagrams. Any characters can be deleted from either of the strings.
+
+Complete the makeAnagram function in the editor below.
+
+    makeAnagram has the following parameter(s):
+        -string a: a string
+        -string b: another string
+        -return int: the minimum total characters that must be deleted
+
+Input Format:
+    The first line contains a single string, a.
+    The second line contains a single string, b.
+    
+Example Input:
+    cde
+    abc
+
+Example Output:
+    4
+    
+"""
+
+import os
+
+# Complete the makeAnagram function below.
+def makeAnagram(a, b):
+    min_chars = 0
+    
+    #Create a hash array to count the frequency of each letter in the alphabet
+    a_hash = [0] * 26
+    b_hash = [0] * 26
+    
+    #Count the frequency of each letter for both strings
+    for i in range(len(a)):
+        a_hash[ord(a[i])-ord('a')] += 1
+        
+    for i in range(len(b)):
+        b_hash[ord(b[i])-ord('a')] += 1
+    
+    #Calculate the difference between each string's letters
+    #26 is the length of the alphabet
+    #Use absolute value so the value is not negative
+    for i in range(26):
+        min_chars += abs(a_hash[i] - b_hash[i])
+        
+    return min_chars
+                
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    a = input()
+
+    b = input()
+
+    res = makeAnagram(a, b)
+
+    fptr.write(str(res) + '\n')
+
+    fptr.close()
