@@ -1,0 +1,56 @@
+"""
+Alternating Characters
+
+You are given a string containing characters "A" and "B" only. Your task is to change it into 
+a string such that there are no matching adjacent characters. To do this, you are allowed to 
+delete zero or more characters in the string.
+
+Your task is to find the minimum number of required deletions.
+
+Input Format:
+  The first line contains an integer q, the number of queries.
+  The next q lines each contain a string to analyze.
+  
+Example Input:
+    5
+    AAAA
+    BBBBB
+    ABABABAB
+    BABABA
+    AAABBB
+    
+Example Output:
+    3
+    4
+    0
+    0
+    4
+"""
+
+import os
+
+# Complete the alternatingCharacters function below.
+def alternatingCharacters(s):
+    total = 0
+    
+    #compare previous letter with current letter to 
+    #check if they are the same
+    for i in range(1, len(s)):
+        if s[i - 1] == s[i]:
+            total += 1
+            
+    return total
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = alternatingCharacters(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
