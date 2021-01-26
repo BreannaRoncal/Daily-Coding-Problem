@@ -1,0 +1,60 @@
+"""
+Hash Tables: Ransom Note
+
+Harold is a kidnapper who wrote a ransom note, but now he is worried it will be traced back to him through his handwriting. 
+He found a magazine and wants to know if he can cut out whole words from it and use them to create an untraceable replica of 
+his ransom note. The words in his note are case-sensitive and he must use only whole words available in the magazine. He cannot 
+use substrings or concatenation to create the words he needs.
+
+Given the words in the magazine and the words in the ransom note, print Yes if he can replicate his ransom note exactly using 
+whole words from the magazine; otherwise, print No.
+
+Input Format:
+    The first line contains two space-separated integers, m and n, the numbers of words in the "magazine"and the "note".
+    The second line contains m space-separated strings, each magazine[i].
+    The third line contains n space-separated strings, each note[i].
+    
+Example Input:
+    6 5
+    two times three is not four
+    two times two is four
+
+Example Output:
+    No
+"""
+
+# Complete the checkMagazine function below.
+def checkMagazine(magazine, note):
+    #Make a dictionary of the words and their frequency from magazine
+    correct_words = {}
+    for i in magazine:
+        if i not in correct_words:
+            correct_words[i] = 1
+            
+        else:
+            correct_words[i] += 1
+            
+            
+    #Now check if the magazine has the words for note
+    for i in note:
+        if i not in correct_words or correct_words[i] == 0:
+            print("No")
+            return
+        else:
+            correct_words[i] -= 1
+        
+    print("Yes")
+    
+    
+if __name__ == '__main__':
+    mn = input().split()
+
+    m = int(mn[0])
+
+    n = int(mn[1])
+
+    magazine = input().rstrip().split()
+
+    note = input().rstrip().split()
+
+    checkMagazine(magazine, note)
