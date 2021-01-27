@@ -1,0 +1,48 @@
+"""
+Two Strings
+
+Given two strings, determine if they share a common substring. A substring may be as small as one character. 
+
+Input Format:
+    The first line contains a single integer p, the number of test cases.
+    The following p pairs of lines are as follows:
+        1. The first line contains string a1.
+        2. The second line contains string s2.
+        
+Example Input:
+    2
+    hello
+    world
+    hi
+    world
+    
+Example Output:
+    YES
+    NO
+"""
+import os
+
+# Complete the twoStrings function below.
+def twoStrings(s1, s2):
+    #Iterate through s1 and return YES if s1 and s2 share a substring of 1 character
+    for i in s1:
+        if i in s2:
+            return "YES"
+    
+    return "NO"
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        s1 = input()
+
+        s2 = input()
+
+        result = twoStrings(s1, s2)
+
+        fptr.write(result + '\n')
+
+    fptr.close()
