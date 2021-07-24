@@ -1,0 +1,75 @@
+"""
+Given an array arr[] and a number K where K is smaller than size of array, the task is to find the Kth smallest element in the given array. 
+It is given that all array elements are distinct.
+
+Expected Time Complexity: O(n)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 <= N <= 105
+1 <= arr[i] <= 105
+1 <= K <= N
+"""
+
+#Brute Force method using .sort() on the array. The return the k - 1 element of the sorted array
+
+class Solution:
+    def kthSmallest(self,arr, l, r, k):
+        '''
+        arr : given array
+        l : starting index of the array i.e 0
+        r : ending index of the array i.e size-1
+        k : find kth smallest element and return using this function
+        '''
+        smallest = -1
+        
+        arr.sort()
+        smallest = arr[k - 1]
+        
+        return smallest
+        
+
+#Better solution: Similar to the quicksort method, Pivot and Partition choosing the partition that has k-1 th index.  
+ This also doesn't waste time sorting elements that we don't need
+ 
+ class Solution:
+    def kthSmallest(self,arr, l, r, k):
+        '''
+        arr : given array
+        l : starting index of the array i.e 0
+        r : ending index of the array i.e size-1
+        k : find kth smallest element and return using this function
+        '''
+        pivot = self.partition(arr, l, r)
+        
+        if (pivot == k):
+            return arr[pivot]
+        elif (pivot > k):
+            return self.kthSmallest(arr, l, pivot - 1, k)
+        else:
+            return self.kthSmallest(arr, pivot + 1, r, k - pivot + l - 1)
+        
+    
+    #uses last element as the pivot
+    #left side has smaller elements
+    #and right side has greater elements
+    def partition(self, arr, l, r):
+        #pivot is the last element of the array
+        p = arr[r]
+        
+        #i is the starting index
+        i = l
+        
+        for j in range(l, r):
+            #if j is less than the pivot, then swap the element at i with the element at j
+            #increment i
+            if (j <= p):
+                arr[i], arr[j] = arr[j], arr[i]
+                i += 1
+        
+        #after all the elements less than the pivot is on the left side, 
+        #swap the ith element with the pivot
+        arr[i], arr[r] = arr[r], arr[i]
+        
+        #index of the pivot element
+        return i
