@@ -1,0 +1,57 @@
+"""
+You are given an array and you need to find number of tripets of indices (i, j, k) such that the elements at 
+those indices are in geometric progression for a given common ratio r and i < j < k. 
+
+Example:
+  arr = [1, 4, 16, 64]
+  r = 4
+  
+  There are [1, 4, 16] and [4, 16, 64] at indices (0, 1, 2) and (1, 2, 3). 
+  Return 2. 
+"""
+
+from collections import defaultdict
+
+import os
+
+
+
+# I only have to count the number of triplets, I do not have to keep track of the indices
+def countTriplets(arr, r):
+    num_of_triplets = 0
+    
+    #keep track of the third part of the geometric progression with ratio r
+    triplet_vals = defaultdict(int)
+    
+    #keep track of the second part of the geometric progression with ratio r
+    double_vals = defaultdict(int)
+    
+    # triple_vals and double_vals will only increment they both iterate on the same i * r
+    for i in arr:
+        #increment the num_of_triplets by the triplet_vals that end with i
+        num_of_triplets += triplet_vals[i]
+        
+        #increment the triplet_vals that will end with i * r
+        triplet_vals[i * r] += double_vals[i]  
+        
+        #increment double_vals that end with i * r because to get a triplet we need to keep track of the pairs
+        double_vals[i * r] += 1
+
+    return num_of_triplets
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nr = input().rstrip().split()
+
+    n = int(nr[0])
+
+    r = int(nr[1])
+
+    arr = list(map(int, input().rstrip().split()))
+
+    ans = countTriplets(arr, r)
+
+    fptr.write(str(ans) + '\n')
+
+    fptr.close()
