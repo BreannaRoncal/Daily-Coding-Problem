@@ -1,0 +1,68 @@
+"""
+Trapping Rain Water
+
+Given an array arr[] of N non-negative integers representing the 
+height of blocks. If width of each block is 1, compute how much water 
+can be trapped between the blocks during the rainy season. 
+"""
+
+
+class Solution:
+    #calculate how much water is trapped by comparing the left side
+    #to the right side
+    def trappingWater(self, arr,n):
+        #if there is no list
+        if not arr:
+            return 0
+            
+        l = 0
+        r = n - 1
+        left_max = arr[l]
+        right_max = arr[r]
+        total_water = 0
+        
+        #loop until both sides meet
+        #calucualte how much water can be held at the current index
+        #of the array
+        while l < r:
+            if left_max < right_max:
+                l += 1
+                left_max = max(left_max, arr[l])
+                total_water += left_max - arr[l]
+            else:
+                r -= 1
+                right_max = max(right_max, arr[r])
+                total_water += right_max - arr[r]
+                
+        return total_water
+                
+        
+
+#{ 
+#  Driver Code Starts
+#Initial Template for Python 3
+
+import math
+
+
+
+def main():
+        T=int(input())
+        while(T>0):
+            
+            n=int(input())
+            
+            arr=[int(x) for x in input().strip().split()]
+            obj = Solution()
+            print(obj.trappingWater(arr,n))
+            
+            
+            T-=1
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+# } Driver Code Ends
