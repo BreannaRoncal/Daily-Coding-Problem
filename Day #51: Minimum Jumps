@@ -1,0 +1,43 @@
+
+def minJumps(self, arr):
+  #code here
+  arrLen = len(arr)
+  
+  # if only one element
+  if arrLen == 1:
+      return 0
+    # can't move
+    if arr[0] == 0:
+        return -1
+        
+    # farthest point we can reach
+    maxReach = arr[0]
+    #end of range for current jump
+    stepEnd = arr[0]
+    
+    jumps = 1
+    
+    for i in range(arrLen):
+        # reached the end
+        if i == arrLen - 1:
+            return jumps
+        
+        #update the farthest point we can reach
+        maxReach = max(maxReach, i + arr[i])
+        
+        #if reached the end of the current jump
+        if i == stepEnd:
+            jumps += 1
+            stepEnd = maxReach
+            
+            #
+            if stepEnd > arrLen:
+                return jumps
+                
+        # cannot move further
+        if i >= maxReach:
+            return -1
+    
+    # no solution
+    return -1
+
