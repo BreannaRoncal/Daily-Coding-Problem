@@ -31,43 +31,47 @@ class Solution:
     # arr[]: Input Array
     # N : Size of the Array arr[]
     #Function to count inversions in the array.
-    def mergeSort(self, arr, count):
+    def __init__(self):
+        self.count = 0
+        
+    def mergeSort(self, arr):
         n = len(arr)
         if n == 0 or n == 1:
             return arr
         mid = n // 2
-        l = self.mergeSort(arr[0 : mid], count)
-        r = self.mergeSort(arr[mid :], count)
-        res = []
+        left = self.mergeSort(arr[0:mid])
+        right = self.mergeSort(arr[mid:])
+        result = []
         
         i = 0
         j = 0
-        while i < len(l) and j < len(r):
-            if l[i] <= r[j]:
-                res.append(l[i])
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                result.append(left[i])
                 i += 1
             else:
-                count[0] = count[0] + len(l) - i
-                res.append(r[j])
+                self.count += len(left) - i
+                result.append(right[j])
                 j += 1
-                
-        if i < len(l):
-            while i < len(l):
-                res.append(l[i])
-                i += 1
-                
-        if j < len((r)):
-            while j < len(r):
-                res.append(r[j])
-                j += 1
-        return res
         
+       
+        while i < len(left):
+            result.append(left[i])
+            i += 1
+                
         
+        while j < len(right):
+            result.append(right[j])
+            j += 1
+        
+        return result
+        
+    
     def inversionCount(self, arr):
         # Your Code Here
-        count = [0]
-        result = self.mergeSort(arr, count)
-        return count[0]
+        
+        result = self.mergeSort(arr)
+        return self.count
 
 
 #{ 
