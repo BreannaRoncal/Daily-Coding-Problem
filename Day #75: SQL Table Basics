@@ -1,0 +1,45 @@
+-- Create a table named friends with 3 columns: id, name, and birthday
+CREATE TABLE friends (
+  id INTEGER,
+  name TEXT,
+  birthday DATE
+);
+
+-- Insert 3 friends
+INSERT INTO friends (id, name, birthday)
+VALUES (1, 'Ororo Munroe', '1940-05-30');
+
+INSERT INTO friends (id, name, birthday)
+VALUES (2, 'Andy Tsoi', '1997-05-30');
+
+INSERT INTO friends (id, name, birthday)
+VALUES (3, 'Elia Castle', '1997-11-17');
+
+-- Change Ororo Munroe's name to her hero name'
+UPDATE friends
+SET name = 'Storm'
+WHERE id = 1;
+
+-- Add a column for email
+ALTER TABLE friends
+ADD COLUMN email TEXT;
+
+-- Update emails for all friends because it is NULL 
+UPDATE friends
+SET email = 'storm@codecademy.com'
+WHERE id = 1;
+
+UPDATE friends
+SET email = 'andy@codecademy.com'
+WHERE id = 2;
+
+UPDATE friends
+SET email = 'elia@codecademy.com'
+WHERE id = 3;
+
+-- Delete Storm from friends table
+DELETE FROM friends
+WHERE id = 1;
+
+-- View final table
+SELECT * FROM friends;
