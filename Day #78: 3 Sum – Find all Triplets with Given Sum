@@ -1,0 +1,92 @@
+"""
+3 Sum – Find all Triplets with Given Sum
+
+Given an array arr[] and an integer target, the task is to find all possible indices {i, j, k} of triplet {arr[i], arr[j], arr[k]} 
+such that their sum is equal to given target and all indices in a triplet should be distinct (i != j, j != k, k != i). 
+We need to return indices of a triplet in sorted order, i.e., i < j < k.
+
+Examples:
+
+  Input: arr[] = {0, -1, 2, -3, 1}, target = -2
+  Output: {{0, 3, 4}, {1, 2, 3}}
+  Explanation: Two triplets that add up to -2 are:
+  arr[0] + arr[3] + arr[4] = 0 + (-3) + (1) = -2
+  arr[1] + arr[2] + arr[3] = (-1) + 2 + (-3) = -2
+  
+  Input: arr[] = {1, -2, 1, 0, 5}, target = 1
+  Output: {}
+  Explanation: There is no triplet whose sum is equal to 1. 
+
+Solution below uses Hashing – O(n^3) time and O(n^2) space
+"""
+
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+import math
+
+
+# } Driver Code Ends
+
+#User function Template for python3
+class Solution:
+    def threeSum(self, arr, target):
+        # Your code here
+        n = len(arr)
+        mp = {}
+        
+        # Use set so there's no duplicates
+        result = set()
+        
+        # Make a dictionary to store the sum of all pairs with their indices
+        for i in range(n):
+            for j in range(i + 1, n):
+                sum = arr[i] + arr[j]
+                if sum not in mp:
+                    mp[sum] = []
+                mp[sum].append((i, j))
+                
+        # Find remainder so sum equals the target
+        for i in range(n):
+            remainder = target - arr[i]
+            if remainder in mp:
+                for pair in mp[remainder]:
+                    
+                    # Make sure all indicies are different and sorted
+                    if pair[0] != i and pair[1] != i:
+                        possibleAnswer = sorted([i, pair[0], pair[1]])
+                        result.add(tuple(possibleAnswer))
+        
+        return [list(triplet) for triplet in result]
+
+
+#{ 
+ # Driver Code Starts.
+
+def main():
+    T = int(input())
+    while (T > 0):
+
+        A = [int(x) for x in input().strip().split()]
+
+        k = int(input())
+        ob = Solution()
+        res = ob.threeSum(A, k)
+        res = sorted(res)
+        if len(res) == 0:
+            print('[]')
+        for i in range(len(res)):
+            for j in range(len(res[i])):
+                print(res[i][j], end=" ")
+            print("")
+        print('~')
+        T -= 1
+
+
+if __name__ == "__main__":
+    main()
+
+# } Driver Code Ends
