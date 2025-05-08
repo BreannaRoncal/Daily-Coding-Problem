@@ -1,0 +1,103 @@
+"""
+Check for BST
+
+Given the root of a binary tree. Check whether it is a BST or not.
+Note: We are considering that BSTs can not contain duplicate Nodes.
+A BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+Examples:
+
+Input: root = [2, 1, 3, N, N, N, 5]
+
+
+Output: true 
+Explanation: The left subtree of every node contains smaller keys and right subtree of every node contains greater keys. Hence, the tree is a BST.
+Input: root = [2, N, 7, N, 6, N, 9] 
+
+
+
+Output: false 
+Explanation: Since the node to the right of node with key 7 has lesser key value, hence it is not a valid BST.
+Input: root = [10, 5, 20, N, N, 9, 25]
+
+
+Output: false
+Explanation: The node with key 9 present in the right subtree has lesser key value than root node.
+Constraints:
+1 ≤ number of nodes ≤ 105
+1 ≤ node->data ≤ 109
+"""
+
+class Solution:
+    def helper(self, root, min_elm, max_elm):
+        if root is None:
+           return True
+        if root.data >= max_elm or root.data <= min_elm:
+            return False
+        return self.helper(root.left, min_elm, root.data) and self.helper(root.right, root.data, max_elm)
+       
+    #Function to check whether a Binary Tree is BST or not.
+    def isBST(self, root):
+        #code here
+        return self.helper(root, -sys.maxsize - 1, sys.maxsize)
+        
+
+
+#{ 
+ # Driver Code Starts
+from collections import deque
+import sys
+
+sys.setrecursionlimit(10**8)
+
+
+# Tree Node
+class Node:
+
+    def __init__(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+
+
+# Function to Build Tree
+def buildTree(s):
+    if len(s) == 0 or s[0] == "N":
+        return None
+
+    ip = list(map(str, s.split()))
+    root = Node(int(ip[0]))
+    q = deque()
+    q.append(root)
+    i = 1
+
+    while i < len(ip):
+        currNode = q.popleft()
+        if ip[i] != "N":
+            currNode.left = Node(int(ip[i]))
+            q.append(currNode.left)
+        i += 1
+        if i < len(ip) and ip[i] != "N":
+            currNode.right = Node(int(ip[i]))
+            q.append(currNode.right)
+        i += 1
+
+    return root
+
+
+# Main code
+if __name__ == "__main__":
+    t = int(input())
+    for _ in range(t):
+        s = input()
+        root = buildTree(s)
+        if Solution().isBST(root):
+            print("true")
+        else:
+            print("false")
+        print("~")
+
+# } Driver Code Ends
